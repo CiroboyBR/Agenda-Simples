@@ -11,3 +11,4 @@ wxWidgets 3.0   -    https://www.wxwidgets.org/news/2014/10/wxwidgets-3.0.2-rele
 Mysql Connector C    -   https://dev.mysql.com/downloads/connector/c/
 
 
+Utilize -std=c99 no compilador!
