@@ -26,6 +26,7 @@ char MSG_conectado[100];
 #include <wx/string.h>
 //*)
 void insere_tabela_pessoa(wxString nom, wxString tel);
+void remove_tabela_pessoa(wxString nome) ;
 void consulta_tabela();
 //helper functions
 enum wxbuildinfoformat {
@@ -145,8 +146,25 @@ void AgendaFrame::OnButton1Click(wxCommandEvent& event)
 {
 }
 
-void AgendaFrame::OnButton2Click(wxCommandEvent& event)
-{
+//deletar da agenda
+void AgendaFrame::OnButton2Click(wxCommandEvent& event) {
+
+    mysql_init(&conexao);
+
+  if ( mysql_real_connect(&conexao, SERVIDOR_MYSQL, USUARIO_MYSQL, SENHA_MYSQL, BD_MYSQL, 0, NULL, 0) ) {
+
+    //printf("MySQL client version: %s\n", mysql_get_client_info());
+   // sprintf(MSG_conectado, "Conectado ao MySQL versão %s", mysql_get_client_info());
+  //  wxMessageBox(MSG_conectado);
+
+    remove_tabela_pessoa(TextCtrl1->GetValue() );
+    //consulta_tabela();
+   // sprintf(comando,"insert into pessoa(nome, telefone) values('%s', '%s')", nome, telefone);
+  }
+  else
+    wxMessageBox(("\nFalha na conexão com o DB!\n"));
+
+  mysql_close(&conexao);
 }
 
 
@@ -171,7 +189,7 @@ void AgendaFrame::OnButton1Click1(wxCommandEvent& event) {
 }
 
 void insere_tabela_pessoa(wxString nome, wxString telefone) {
-  sprintf(comando,"insert into pessoa(nome, telefone) values('%s', '%s')", (const char*)nome.mbc_str(), (const char*)telefone.mbc_str() );
+  sprintf(comando,"INSERT INTO pessoa(nome, telefone) VALUES('%s', '%s')", (const char*)nome.mbc_str(), (const char*)telefone.mbc_str() );
  /* // Para diagnóstico
   printf("\n%s", (const char*)nome.mbc_str());
   printf("\n%s", (const char*)telefone.mbc_str());
@@ -181,6 +199,19 @@ void insere_tabela_pessoa(wxString nome, wxString telefone) {
     printf("\nInseriu com sucesso");
   else
     printf("\nErro ao Inserir dados no DB\n");
+}
+
+void remove_tabela_pessoa(wxString nome) {
+  sprintf(comando,"DELETE FROM pessoa WHERE nome='%s'", (const char*)nome.mbc_str() );
+ /* // Para diagnóstico
+  printf("\n%s", (const char*)nome.mbc_str());
+  printf("\n%s", (const char*)telefone.mbc_str());
+  printf("\n%s", comando);
+*/
+  if (mysql_query(&conexao, comando) == 0 )
+    printf("\nRemoveu com sucesso");
+  else
+    printf("\nErro ao Remover %s\n", (const char*)nome.mbc_str() );
 }
 
 void consulta_tabela() {

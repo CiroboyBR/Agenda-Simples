@@ -2024,12 +2024,11 @@
 	"wx/scrolwin.h"
 	"wx/textctrl.h"
 
-1445506412 source:e:\arquivos\desenvolvimento\fontes\estudo\wxwidgets\agenda\agendamain.cpp
+1445617712 source:e:\arquivos\desenvolvimento\fontes\estudo\wxwidgets\agenda\agendamain.cpp
 	"AgendaMain.h"
 	<wx/msgdlg.h>
 	<winsock2.h>
 	<mysql.h>
-	<wx/settings.h>
 	<wx/intl.h>
 	<wx/string.h>
 
