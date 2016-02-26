@@ -1,11 +1,4 @@
-/***************************************************************
- * Name:      AgendaMain.cpp
- * Purpose:   Code for Application Frame
- * Author:    Ciro Meneses (ciroccuva@hotmail.com)
- * Created:   2015-10-18
- * Copyright: Ciro Meneses (www.programacaopradiversao.blogspot.com.br)
- * License:
- **************************************************************/
+
 
 #include "AgendaMain.h"
 #include <wx/msgdlg.h>
@@ -154,7 +147,7 @@ void AgendaFrame::OnButton2Click(wxCommandEvent& event) {
   if ( mysql_real_connect(&conexao, SERVIDOR_MYSQL, USUARIO_MYSQL, SENHA_MYSQL, BD_MYSQL, 0, NULL, 0) ) {
 
     //printf("MySQL client version: %s\n", mysql_get_client_info());
-   // sprintf(MSG_conectado, "Conectado ao MySQL versão %s", mysql_get_client_info());
+   // sprintf(MSG_conectado, "Conectado ao MySQL versÃ£o %s", mysql_get_client_info());
   //  wxMessageBox(MSG_conectado);
 
     remove_tabela_pessoa(TextCtrl1->GetValue() );
@@ -162,7 +155,7 @@ void AgendaFrame::OnButton2Click(wxCommandEvent& event) {
    // sprintf(comando,"insert into pessoa(nome, telefone) values('%s', '%s')", nome, telefone);
   }
   else
-    wxMessageBox(("\nFalha na conexão com o DB!\n"));
+    wxMessageBox(("\nFalha na conexÃ£o com o DB!\n"));
 
   mysql_close(&conexao);
 }
@@ -175,7 +168,7 @@ void AgendaFrame::OnButton1Click1(wxCommandEvent& event) {
   if ( mysql_real_connect(&conexao, SERVIDOR_MYSQL, USUARIO_MYSQL, SENHA_MYSQL, BD_MYSQL, 0, NULL, 0) ) {
 
     //printf("MySQL client version: %s\n", mysql_get_client_info());
-   // sprintf(MSG_conectado, "Conectado ao MySQL versão %s", mysql_get_client_info());
+   // sprintf(MSG_conectado, "Conectado ao MySQL versÃ£o %s", mysql_get_client_info());
   //  wxMessageBox(MSG_conectado);
 
     insere_tabela_pessoa(TextCtrl1->GetValue(), TextCtrl2->GetValue() );
@@ -183,14 +176,14 @@ void AgendaFrame::OnButton1Click1(wxCommandEvent& event) {
    // sprintf(comando,"insert into pessoa(nome, telefone) values('%s', '%s')", nome, telefone);
   }
   else
-    wxMessageBox(("\nFalha na conexão com o DB!\n"));
+    wxMessageBox(("\nFalha na conexÃ£o com o DB!\n"));
 
   mysql_close(&conexao);
 }
 
 void insere_tabela_pessoa(wxString nome, wxString telefone) {
   sprintf(comando,"INSERT INTO pessoa(nome, telefone) VALUES('%s', '%s')", (const char*)nome.mbc_str(), (const char*)telefone.mbc_str() );
- /* // Para diagnóstico
+ /* // Para diagnÃ³stico
   printf("\n%s", (const char*)nome.mbc_str());
   printf("\n%s", (const char*)telefone.mbc_str());
   printf("\n%s", comando);
@@ -203,7 +196,7 @@ void insere_tabela_pessoa(wxString nome, wxString telefone) {
 
 void remove_tabela_pessoa(wxString nome) {
   sprintf(comando,"DELETE FROM pessoa WHERE nome='%s'", (const char*)nome.mbc_str() );
- /* // Para diagnóstico
+ /* // Para diagnÃ³stico
   printf("\n%s", (const char*)nome.mbc_str());
   printf("\n%s", (const char*)telefone.mbc_str());
   printf("\n%s", comando);
@@ -240,11 +233,11 @@ void consulta_tabela() {
   }
   mysql_free_result(result);
 }
-// Botão Atualizar
+// BotÃ£o Atualizar
 void AgendaFrame::OnButton3Click(wxCommandEvent& event) {
   mysql_init(&conexao);
   TextCtrl3->Clear();
-  system("cls"); // Só funciona no windows
+  system("cls"); // SÃ³ funciona no windows
 
   if ( mysql_real_connect(&conexao, "127.0.0.1", "root", "", "agenda", 0, NULL, 0) ) {
     // Faz uma busca na tabela
